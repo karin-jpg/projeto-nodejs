@@ -1,5 +1,4 @@
-const express = require('express')
-
-const app = express()
+const customExpress = require('./config/customExpress')
+const app = customExpress()
 
 app.listen(3000, () => console.log('Servidor ativo'))
