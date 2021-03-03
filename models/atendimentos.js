@@ -73,7 +73,20 @@ class Atendimento {
     }
 
     altera(id, valores, res) {
+
+        if(valores.data){
+            valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
+        }
+
+        const sql = 'UPDATE atendimentos set ? WHERE id=?'
         
+        conexao.query(sql, [valores, id], (erro, resultados) => {
+            if(erro){
+                res.status(400).json(erro)
+            } else{
+                res.status(200).json(resultados)
+            }
+        })
     }
 }
 
