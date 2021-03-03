@@ -1,4 +1,13 @@
 const customExpress = require('./config/customExpress')
-const app = customExpress()
+const conexao = require('./infra/conexao')
 
-app.listen(3000, () => console.log('Servidor ativo'))
+conexao.connect(erro => {
+    if(erro){
+        console.log(erro)
+    }else{
+        console.log('Conexão com o banco ativa')
+        const app = customExpress()
+
+        app.listen(3000, () => console.log('Servidor ativo'))
+    }
+})
